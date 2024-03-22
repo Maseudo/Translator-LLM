@@ -6,6 +6,7 @@ import torch
 import time, os
 from json import load as jload
 
+torch.cuda.empty_cache()
 config = jload(open("config.json"))
 model_config = AutoConfig.from_pretrained(pretrained_model_name_or_path=config['pretrained_model_name_or_path'])
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path=config['pretrained_model_name_or_path'], config=model_config, device_map=config['device'], attn_implementation="flash_attention_2", torch_dtype=torch.float16)
