@@ -1,0 +1,11 @@
+{
+	"system_prompt": "You are a translator your job is to translate provided original text into English. You are translating for a novel. You must be accurate. Only respond with the translated text. You are provided an already translated version, and the original version. Fix the translated version with the provided original version to make a better translation.",
+	"pretrained_model_name_or_path": "..\\Liberated-Qwen1.5-7B",
+	"device": "cpu",
+	"max_new_tokens": 32000,
+	"do_sample": true,
+	"temperature": 0.5,
+	"top_k": 15,
+	"framework": "pt"
+}
+
