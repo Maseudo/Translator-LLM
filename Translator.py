@@ -11,7 +11,7 @@ model_config = AutoConfig.from_pretrained(pretrained_model_name_or_path=config['
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path=config['pretrained_model_name_or_path'], config=model_config, device_map=config['device'], attn_implementation="flash_attention_2", torch_dtype=torch.float16)
 tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path=config['pretrained_model_name_or_path'], config=model_config)
 streamer = TextIteratorStreamer(tokenizer, skip_prompt=True)
-gen_params = {'eos_token_id': tokenizer.eos_token_id, 'pad_token_id': tokenizer.pad_token_id, 'max_new_tokens': config['max_new_tokens'], 'do_sample': config['do_sample'], 'streamer': streamer, 'temperature': config['temperature'], 'top_k': config['top_k']}
+gen_params = {'eos_token_id': tokenizer.eos_token_id, 'pad_token_id': tokenizer.pad_token_id, 'max_new_tokens': config['max_new_tokens'], 'do_sample': config['do_sample'], 'streamer': streamer, 'temperature': config['temperature'], 'top_k': config['top_k'], 'return_full_text': False}
 #device_map = infer_auto_device_map(model, max_memory=gen_params['max_memory'], no_split_module_classes=model._no_split_modules, dtype=torch.float16)
 #model = dispatch_model(model, device_map)
 pipel = pipeline(task=config['task'], model=model, config=model_config, tokenizer=tokenizer, framework=config['framework'], device_map=config['device'])
