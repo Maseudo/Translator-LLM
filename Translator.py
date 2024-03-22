@@ -12,10 +12,11 @@ pipel = pipeline(task=config['task'], model=model, config=model_config, tokenize
 streamer = TextIteratorStreamer(tokenizer, skip_prompt=True)
 
 class Jade:
-	def __init__(self, config, model_config, model, tokenizer, streamer):
+	def __init__(self, config, model_config, model, tokenizer, pipel, streamer):
 		self.config = config
 		self.model_config = model_config
 		self.model = model
+		self.pipeline = pipel
 		self.tokenizer = tokenizer
 		self.streamer = streamer
 		self.stop_tag = False
