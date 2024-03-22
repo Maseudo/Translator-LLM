@@ -5,6 +5,9 @@ from sys import stdout
 import torch
 import time, os
 from json import load as jload
+from numba import cuda
+device = cuda.get_current_device()
+device.reset()
 
 torch.cuda.empty_cache()
 config = jload(open("config.json"))
