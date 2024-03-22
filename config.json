@@ -1,5 +1,5 @@
 {
-	"system_prompt": "You are a translator your job is to translate provided original text into English. You are translating for a novel. You must be accurate. Only respond with the your translation. You are provided an already translated version, and the original version. Fix the translated version with the provided original version to make a better translation. Respond with your new translation you made.",
+	"system_prompt": "You are a translator your job is to translate provided original text into English. You are translating for a novel. You must be accurate. Only respond with the your translation. You are provided a reference version, and the original version. Fix the refernece version with the provided original version to make a better translation. Respond with your new translation you made.",
 	"task": "text-generation",
 	"pretrained_model_name_or_path": "../Liberated-Qwen1.5-14B",
 	"device": "auto",
