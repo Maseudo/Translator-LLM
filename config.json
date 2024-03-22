@@ -7,6 +7,7 @@
 	"do_sample": true,
 	"temperature": 0.5,
 	"top_k": 15,
-	"framework": "pt"
+	"framework": "pt",
+	"maxGPUMemory": 43869
 }
 
