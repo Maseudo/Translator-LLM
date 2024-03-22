@@ -8,7 +8,7 @@ config = jload(open("config.json"))
 model_config = AutoConfig.from_pretrained(pretrained_model_name_or_path=config['pretrained_model_name_or_path'])
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path=config['pretrained_model_name_or_path'], config=model_config, device_map=config['device'])
 tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path=config['pretrained_model_name_or_path'], config=model_config)
-pipel = pipeline(task=config['task'], model=model, config=model_config, tokenizer=tokenizer, framework=config['framework'], device_map=config['device'])
+pipel = pipeline(task=config['task'], model=model, config=model_config, tokenizer=tokenizer, framework=config['framework'], device_map=config['device'], num_workers=8, batch_size=8)
 streamer = TextIteratorStreamer(tokenizer, skip_prompt=True)
 
 class Jade:
