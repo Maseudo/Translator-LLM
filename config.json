@@ -5,8 +5,8 @@
 	"device": "auto",
 	"max_new_tokens": 10000,
 	"do_sample": true,
-	"temperature": 0.5,
-	"top_k": 15,
+	"temperature": 1,
+	"top_k": 35,
 	"framework": "pt",
 	"maxGPUMemory": 43869
 }
