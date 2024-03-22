@@ -51,7 +51,7 @@ def clr_screen(): os.system('cls')
 
 def reload(): return Jade()
 
-llm = Jade(config, model_config, model, tokenizer, streamer)
+llm = Jade(config, model_config, model, tokenizer, pipel, streamer)
 
 while True:
 	time.sleep(0.2)
