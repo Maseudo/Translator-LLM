@@ -29,7 +29,7 @@ def generate(llm):
 	llm.gen_proc.start()
  
 def generate_do(llm):
-                output = llm.pipeline(llm.content, eos_token_id=llm.tokenizer.eos_token_id, pad_token_id=llm.tokenizer.pad_token_id, device_map=config['device'], max_new_tokens=llm.config['max_new_tokens'], do_sample=llm.config['do_sample'], streamer=llm.streamer, temperature=llm.config['temperature'], top_k=llm.config['top_k'])
+                output = llm.pipeline(llm.content, eos_token_id=llm.tokenizer.eos_token_id, pad_token_id=llm.tokenizer.pad_token_id, max_new_tokens=llm.config['max_new_tokens'], do_sample=llm.config['do_sample'], streamer=llm.streamer, temperature=llm.config['temperature'], top_k=llm.config['top_k'])
 
 def handle_stream(llm):
 	while llm.stop_tag != True:
