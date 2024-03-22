@@ -8,6 +8,7 @@ config = jload(open("config.json"))
 model_config = AutoConfig.from_pretrained(pretrained_model_name_or_path=config['pretrained_model_name_or_path'])
 model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path=config['pretrained_model_name_or_path'], config=model_config, device_map=config['device'])
 tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path=config['pretrained_model_name_or_path'], config=model_config)
+pipel = pipeline(model = model, tokenizer=tokenizer, streamer=streamer)
 streamer = TextIteratorStreamer(tokenizer, skip_prompt=True)
 
 class Jade:
@@ -27,7 +28,7 @@ def generate(llm):
 	llm.gen_proc.start()
  
 def generate_do(llm):
-                output = llm.model.generate(llm.content_tokenized.input_ids, eos_token_id=llm.tokenizer.eos_token_id, pad_token_id=llm.tokenizer.pad_token_id, max_new_tokens=llm.config['max_new_tokens'], do_sample=llm.config['do_sample'], streamer=llm.streamer, temperature=llm.config['temperature'], top_k=llm.config['top_k'])
+                output = llm.pipeline(llm.content, eos_token_id=llm.tokenizer.eos_token_id, pad_token_id=llm.tokenizer.pad_token_id, device_map=config['device'], max_new_tokens=llm.config['max_new_tokens'], do_sample=llm.config['do_sample'], streamer=llm.streamer, temperature=llm.config['temperature'], top_k=llm.config['top_k'])
 
 def handle_stream(llm):
 	while llm.stop_tag != True:
@@ -56,7 +57,6 @@ while True:
 	llm.input = input("File Name>")
 	llm.original_content = open('./content/'+llm.input+'.txt', 'r', encoding="utf-8").read()
 	llm.translated_content = open('./content/'+llm.input+'-2.txt', 'r', encoding="utf-8").read()
-	llm.content = tokenizer.apply_chat_template([{"role": "system", "content": llm.config['system_prompt']},{"role": "user", "content": "Translated:{"+llm.translated_content+"}Original:{"+llm.original_content+"}"}], tokenize=False, add_generation_prompt=True)
-	llm.content_tokenized = tokenizer([llm.content], return_tensors="pt")
+	llm.content = [{"role": "system", "content": llm.config['system_prompt']},{"role": "user", "content": "Translated:{"+llm.translated_content+"}Original:{"+llm.original_content+"}"}]
 	generate(llm)
 	llm.gen_proc.join()
