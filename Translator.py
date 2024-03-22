@@ -68,6 +68,6 @@ while True:
 	llm.input = input("File Name>")
 	llm.original_content = open('./content/'+llm.input+'.txt', 'r', encoding="utf-8").read()
 	llm.translated_content = open('./content/'+llm.input+'-2.txt', 'r', encoding="utf-8").read()
-	llm.content = [{"role": "system", "content": llm.config['system_prompt']},{"role": "user", "content": "Reference:{"+llm.translated_content+"}Original:{"+llm.original_content+"}"}]
+	llm.content = [{"role": "system", "content": llm.config['system_prompt']},{"role": "user", "content": "Original:{"+llm.original_content+"}"}] #"Reference:{"+llm.translated_content+
 	generate(llm)
 	llm.gen_proc.join()
